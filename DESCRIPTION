@@ -1,0 +1,33 @@
+Package: EMOTIONS
+Type: Package
+Title: 'EMOTIONS: Ensemble Models for Lactation Curves'
+Version: 1.0
+Authors@R: c(person(given = "Pablo",
+           family = "Fonseca",
+           role = c("aut", "cre"),
+           email = "p.fonseca@csic.es"),person("Marcos", "Prates", email = "marcosop@gmail.com", role = "aut"), 
+           person("Aroa", "Suarez-Vega", email = "asuav@unileon.es", role = "aut"),
+           person("Ruth Arribas", "Gonzalo", email = "rarrg@unileon.es", role = "aut"),
+           person("Beatriz", "Gutierrez-Gil", email = "beatriz.gutierrez@unileon.es", role = "aut"),
+           person("Juan José", "Arranz", email = "jjarrs@unileon.es", role = "aut"))
+Description: Lactation curve modeling plays a central role in dairy production, supporting management decisions and the selection of animals with superior productivity and resilience. The package 'EMOTIONS' fits 47 models for lactation curves and creates ensemble models using model averaging based on Akaike information criterion, Bayesian information criterion, root mean square percentage error, and mean squared error, variance of the predictions, cosine similarity for each model's predictions, and Bayesian Model Average. The daily production values predicted through the ensemble models can be used to estimate resilience indicators in the package. Additionally, the package allows the graphical visualization of the model ranks and the predicted lactation curves.
+Depends: R (>= 4.2)
+Imports: dplyr, orthopolynom, quantreg, minpack.lm, tidyr, ggplot2,
+        ggridges, parameters, rlang, tidyselect, splines
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2025-06-17 09:59:37 UTC; pablofonseca
+Author: Pablo Fonseca [aut, cre],
+  Marcos Prates [aut],
+  Aroa Suarez-Vega [aut],
+  Ruth Arribas Gonzalo [aut],
+  Beatriz Gutierrez-Gil [aut],
+  Juan José Arranz [aut]
+Maintainer: Pablo Fonseca <p.fonseca@csic.es>
+Repository: CRAN
+Date/Publication: 2025-06-18 11:50:14 UTC
