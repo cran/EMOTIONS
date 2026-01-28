@@ -1,9 +1,9 @@
-#' Estimate normalized model weights using an Expectation–Maximization (EM) algorithm with a gamma distribution
+#' Estimate normalized model`s weights based on a  Expectation–Maximization (EM) algorithm using a gamma distribution
 #'
 #' @param converged_models A list containing the fitted models for the individual
-#' @param x A data frame containing the daily milking records for the individual
+#' @param x  data frame containing the daily milking records for the individual
 #' @param trait The name of the column containing daily milking records
-#' @return A vector containing the normalized model weights based on the Bayesian Model Averaging (BMA) approach proposed by Duan et al. (2006), adapted to use a gamma distribution
+#' @return A vector containing the model normalized weight based on the Bayeasian Model Average (BMA) appaoch proposed by Duan et al. (2006) with an adaptation for to use a gamma distribution
 #' @keywords internal
 BMAweight_gamma <- function(converged_models, x, trait) {
 

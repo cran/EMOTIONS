@@ -2,7 +2,7 @@
 % Please edit documentation in R/ResInd.R
 \name{ResInd}
 \alias{ResInd}
-\title{Estimate resilience indicators (log-variance, lag-1 autocorrelation, and skewness) from daily milk production records}
+\title{A function to estimate resilience estimators (logarithm of variance, lag1 autocorrelation and skewness) based on daily milk production records}
 \usage{
 ResInd(
   production_df,
@@ -15,23 +15,23 @@ ResInd(
 )
 }
 \arguments{
-\item{production_df}{A list containing data frames with the daily production records (actual or predicted) obtained from the LacCurveFit function}
+\item{production_df}{The list containing the data frames with the daily production records (actual or predicted) obtained from the LacCurveFit function}
 
-\item{dim_filter_range}{A numeric vector with the lower and upper limits used to filter out lactation records at the beginning and end of lactation. If no filtering is needed, set the first two values to the minimum days in milk and the last two to the maximum}
+\item{dim_filter_range}{A vector containing the lower and upper limits to remove lactation records from the begin and end of the lactation, if needed. If it is not necessary to remove daily records, the first two values can be set as the minimum days in milk value and the last two as the maximum days in milk values}
 
-\item{outlier_sd_threshold}{A numeric threshold defining the maximum number of standard deviations allowed for resilience indicator values before considering them outliers}
+\item{outlier_sd_threshold}{A threshold defining the maximum standard deviations to consider an individual resilience indicator value}
 
-\item{weight}{The name of the column containing the selected ensemble prediction. Default is "weight_AIC"}
+\item{weight}{The name of the column containing the selected ensemble prediction. The default is weight_AIC}
 
 \item{trait}{The name of the column containing daily milking records}
 
 \item{DIM}{The name of the column containing days in milk records}
 
-\item{ID_col}{The name of the column containing the unique individual IDs}
+\item{ID_col}{The name of the column containing the unique IDs of the individuals}
 }
 \value{
-A list containing: (1) the daily milk production values after filtering, (2) a list of removed individuals, and (3) a data frame with the resilience indicators
+A list containing the daily milk production values after filtering, the list of removed animals, and a data frame with the resilience indicators
 }
 \description{
-Estimate resilience indicators (log-variance, lag-1 autocorrelation, and skewness) from daily milk production records
+A function to estimate resilience estimators (logarithm of variance, lag1 autocorrelation and skewness) based on daily milk production records
 }

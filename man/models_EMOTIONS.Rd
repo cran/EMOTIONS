@@ -7,11 +7,11 @@
 \format{
 A data frame with 47 rows and 5 variables:
 \itemize{
-  \item Model: Model description
-  \item Model_acronym: Model acronym used in the EMOTIONS functions
-  \item Authors: List of authors of each model available in EMOTIONS
-  \item Year: Year of publication of each model available in EMOTIONS
-  \item Reference: Link to the original publication of each model available in EMOTIONS
+ \item Model: Model description
+ \item Model_acronym: Model acronym used in the EMOTIONS functions
+ \item Authors: List of authors of each model available in EMOTIONS
+ \item Year: Year of publication of each model available in EMOTIONS
+ \item Reference: Link of the original publication of each model available in EMOTIONS
 }
 }
 \usage{

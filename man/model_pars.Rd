@@ -7,8 +7,8 @@
 \format{
 A data frame with 42 rows and 2 variables:
 \itemize{
-  \item Model_acronym: The acronym of the models that can have the parameters edited
-  \item Parameters: The list of parameters included in each model
+ \item Model_acronym: The acronym of the models that can have the parameters edited
+ \item Parameters:  The list of parameters included in each model
 }
 }
 \usage{

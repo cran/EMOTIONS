@@ -7,14 +7,14 @@
 ParDef(x, trait, dim)
 }
 \arguments{
-\item{x}{A data frame containing the daily milking records for the individual}
+\item{x}{data frame containing the daily milking records for the individual}
 
-\item{trait}{The name of the column containing the daily milking records}
+\item{trait}{The name of the column containing daily milking records}
 
-\item{dim}{The name of the column containing the days in milk (DIM) records}
+\item{dim}{The name of the column containing days in milk records}
 }
 \value{
-A list containing the parameters to be used in the lactation curve models
+A list containing the parameters to be included in the lactation curve models
 }
 \description{
 Define the parameters for the lactation curve models to be fitted

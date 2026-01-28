@@ -1,21 +1,23 @@
-#' Perform model fitting and weight assignment based on different strategies for each individual ID
+#' Performs the model fitting and the weight assignment based on different strategies for each individual ID
 #'
 #' @param data A data frame containing the daily milking records
 #' @param ID_col The name of the column containing the unique IDs of the individuals
-#' @param ID The individual ID being analyzed
+#' @param ID The individual ID that is being analyzed
 #' @param trait The name of the column containing daily milking records
-#' @param dim The name of the column containing days in milk (DIM) records
-#' @param alpha A penalization factor ranging from 0 to 1, used in the estimation of the model weights
-#' @param models A vector describing the models to be included in the analysis. A total of 47 models are available in EMOTIONS. The default option is "All", which includes all 47 models. Alternatively, a subset of the following models can be provided: "MMR", "MME", "brody23", "brody24", "SCH", "SCHL", "PBE", "wood", "DHA", "CB", "QP", "CLD", "PapBo1", "PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1", "GS2", "LQ", "wil", "wilk", "wilycsml", "BC", "DJK", "MG2", "MG4", "MG", "KHN", "AS", "FRP", "PTmult", "PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw", "legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg"
-#' @param param_list A list containing the models (named as in the `models` parameter) and their respective parameters
-#' @param silent A logical value indicating whether warnings should be suppressed during model fitting. The default is TRUE (warnings are not printed)
-#' @importFrom stats predict AIC var sd acf as.formula dgamma lm median nls nls.control
-#' @importFrom orthopolynom polynomial.values legendre.polynomials scaleX
+#' @param dim  The name of the column containing days in milk records
+#' @param alpha A penalization factor, ranging from 0 to 1, for the estimation of the model`s weight
+#' @param models A vector describing the models to be included in the analysis. In total, 47 models are included in EMOTIONS. The default option is "All", which results in the inclusion of the 47 models. Alternatively, a vector containing any subset of the following models can be provided: "MMR","MME","brody23","brody24", "SCH","SCHL","PBE","wood","DHA", "CB","QP","CLD","PapBo1","PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1",  "GS2","LQ", "wil", "wilk", "wilycsml", "BC", "DJK","MG2", "MG4", "MG", "KHN", "AS", "FRP","PTmult","PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw","legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg"
+#' @param param_list A list composed by the models, named as in the models parameter, and the repective parameters included in the models.
+#' @param silent A logical string defining if warning should be printed or not during the model fitting. The defaul is TRUE (not printing warnings).
+#' @importFrom stats predict AIC var sd acf as.formula dgamma lm median nls
+#' @importFrom orthopolynom polynomial.values
+#' @importFrom orthopolynom legendre.polynomials
+#' @importFrom orthopolynom scaleX
+#' @importFrom stats nls.control
 #' @importFrom quantreg rq
 #' @importFrom minpack.lm nlsLM
 #' @importFrom splines ns
-#' @return A list containing the fitted models, model weights and ranks, and the predicted daily production obtained through the model ensemble
-#' @keywords internal
+#' @return A list containing the fitted models, the model`s weigths and ranks, and the predicted daily production obtained through the model ensemble
 ModelsLac<-function(data,ID_col,ID,trait,dim, alpha,models,param_list=NULL, silent=silent){
 
   x<-data

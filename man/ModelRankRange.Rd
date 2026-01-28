@@ -9,7 +9,7 @@ ModelRankRange(LacCurveFit, metric = "AIC_rank")
 \arguments{
 \item{LacCurveFit}{The object obtained from the LacCurveFit function}
 
-\item{metric}{The name of the metric to be used to plot the model's ranks}
+\item{metric}{The name of the metric to be use to plot the model´s ranks}
 }
 \value{
 A line plot that shows the range of the ranks obtained for each model across the individuals

@@ -1,6 +1,6 @@
 #' Create a line plot that shows the range of the ranks obtained for each model across the individuals
 #' @param LacCurveFit The object obtained from the LacCurveFit function
-#' @param metric The name of the metric to be used to plot the model's ranks
+#' @param metric The name of the metric to be use to plot the model´s ranks
 #' @importFrom ggplot2 ggplot aes geom_point geom_line geom_segment labs theme theme_minimal element_text geom_text scale_x_continuous
 #' @importFrom dplyr n_distinct
 #' @return A line plot that shows the range of the ranks obtained for each model across the individuals

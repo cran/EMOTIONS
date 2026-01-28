@@ -2,7 +2,7 @@
 % Please edit documentation in R/ModelsLac.R
 \name{ModelsLac}
 \alias{ModelsLac}
-\title{Perform model fitting and weight assignment based on different strategies for each individual ID}
+\title{Performs the model fitting and the weight assignment based on different strategies for each individual ID}
 \usage{
 ModelsLac(
   data,
@@ -21,24 +21,23 @@ ModelsLac(
 
 \item{ID_col}{The name of the column containing the unique IDs of the individuals}
 
-\item{ID}{The individual ID being analyzed}
+\item{ID}{The individual ID that is being analyzed}
 
 \item{trait}{The name of the column containing daily milking records}
 
-\item{dim}{The name of the column containing days in milk (DIM) records}
+\item{dim}{The name of the column containing days in milk records}
 
-\item{alpha}{A penalization factor ranging from 0 to 1, used in the estimation of the model weights}
+\item{alpha}{A penalization factor, ranging from 0 to 1, for the estimation of the model`s weight}
 
-\item{models}{A vector describing the models to be included in the analysis. A total of 47 models are available in EMOTIONS. The default option is "All", which includes all 47 models. Alternatively, a subset of the following models can be provided: "MMR", "MME", "brody23", "brody24", "SCH", "SCHL", "PBE", "wood", "DHA", "CB", "QP", "CLD", "PapBo1", "PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1", "GS2", "LQ", "wil", "wilk", "wilycsml", "BC", "DJK", "MG2", "MG4", "MG", "KHN", "AS", "FRP", "PTmult", "PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw", "legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg"}
+\item{models}{A vector describing the models to be included in the analysis. In total, 47 models are included in EMOTIONS. The default option is "All", which results in the inclusion of the 47 models. Alternatively, a vector containing any subset of the following models can be provided: "MMR","MME","brody23","brody24", "SCH","SCHL","PBE","wood","DHA", "CB","QP","CLD","PapBo1","PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1",  "GS2","LQ", "wil", "wilk", "wilycsml", "BC", "DJK","MG2", "MG4", "MG", "KHN", "AS", "FRP","PTmult","PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw","legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg"}
 
-\item{param_list}{A list containing the models (named as in the `models` parameter) and their respective parameters}
+\item{param_list}{A list composed by the models, named as in the models parameter, and the repective parameters included in the models.}
 
-\item{silent}{A logical value indicating whether warnings should be suppressed during model fitting. The default is TRUE (warnings are not printed)}
+\item{silent}{A logical string defining if warning should be printed or not during the model fitting. The defaul is TRUE (not printing warnings).}
 }
 \value{
-A list containing the fitted models, model weights and ranks, and the predicted daily production obtained through the model ensemble
+A list containing the fitted models, the model`s weigths and ranks, and the predicted daily production obtained through the model ensemble
 }
 \description{
-Perform model fitting and weight assignment based on different strategies for each individual ID
+Performs the model fitting and the weight assignment based on different strategies for each individual ID
 }
-\keyword{internal}

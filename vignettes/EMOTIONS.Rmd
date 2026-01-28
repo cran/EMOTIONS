@@ -20,7 +20,7 @@ author:
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{EMOTIONS: Ensemble Models fOr lacTatION curveS}
+  %\VignetteIndexEntry{EMOTIONS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -51,7 +51,7 @@ The **EMOTIONS** package provides a set of tools for fitting 47 different lactat
 Use the following code to install **EMOTIONS**:
 
 ```{r, eval=FALSE}
-devtools::install_github("https://github.com/pablobio/EMOTIONS")
+install.packages("EMOTIONS")
 ```
 
 ## **Analysis**
@@ -286,3 +286,192 @@ The summary statistics for the resilience indicators can be retrieved using:
 out.res$ri_stats
 ```
 
+### Imputation of missing records
+
+The EMOTIONS package also allows the uer to impute missing MY using the ensemble created. For this, the function **imp_my** must be used. The function receive as input the list containing the data frames with the daily production records obtained from the LacCurveFit function and the a vector with the days in milk where the milk yield will be imputed. It can contain observed and missing DIM. Below we will use a example the records from `ID2`. The MY from days 32,34,36,37 and 40 will be masked and the whole 1-305 DIM MY will be predicted using the ensemble.
+
+```{r, warning=FALSE}
+
+#Saving the original values
+original.MY<-LacData[which(LacData$ID=="ID2" & LacData$DIM
+                           %in%c(32,34,36,37,40)),
+                     "DMY"]
+
+#Masking the original values
+LacData.imp<-LacData
+
+LacData.imp[which(LacData.imp$ID=="ID2" & LacData.imp$DIM
+                           %in%c(32,34,36,37,40)),
+                     "DMY"]<-NA
+
+LacData.imp<-LacData.imp[!is.na(LacData.imp$DMY),]
+
+# Running model fitting and ensemble modeling
+out.ensemble.imp <- LacCurveFit(
+  data = LacData.imp, ID = "ID", trait = "DMY",
+  dim = "DIM", alpha = 0.1,
+  models = "All", param_list = NULL, silent=TRUE
+)
+
+#Imputing missing masked MY
+out.imp<-imp_my(out.ind = out.ensemble.imp, dim = 1:305)
+
+#Checking output
+out.imp[which(out.imp$ID=="ID2" & out.imp$DIM
+                           %in%c(32,34,36,37,40)),]
+
+#Comparing with the original values
+original.MY
+```
+
+### Identification of milk loss events and estimation of resilience indicators
+
+The function `milkloss_detect` allows the users to identify milk loss events based on different criteria.
+
+- "pctbase": recovery when the observed value reaches a given fraction of the baseline (rec), for a given number of consecutive days (stick); 
+
+- "band": recovery when the observation is inside a tolerance band around the baseline (±tol), for at least stick consecutive days; 
+
+- "resid": recovery when the residual has improved enough from the nadir (by a fraction rec of the nadir’s absolute residual) for stick consecutive days.
+
+The function computes several descriptors of milk-yield perturbation episodes.
+
+1) Nadir (day of minimum)
+
+The worst day inside the episode (deepest point of the perturbation).
+
+t_hat = argmin over t in [t_start, t_end] of obs(t)
+
+Nadir = obs(t_hat)
+
+where 't_start' and 't_end' are the episode boundaries.
+
+2) Amplitude (drop)
+
+Depth of the dip relative to the baseline at the episode’s start.
+
+A = baseline(t_start) - obs(t_hat)
+
+Some variants use 'baseline(t_hat)' instead of 'baseline(t_start)'; here the start of the episode is used as the reference.
+
+3) ML_per_event (AUD)
+
+Total milk lost (in baseline units) over the episode, i.e., the integrated milk deficit.
+
+ML_per_event = AUD = sum over t from t_start to t_end of [baseline(t) - obs(t)]
+
+In discrete data, AUD is computed with day-weighting: each observation contributes
+
+(baseline(t) - obs(t)) * delta_days
+
+where 'delta_days' is the gap to the next observed DIM (last day weight = 1).
+
+4) Time-to-baseline (TTB)
+
+Time after the nadir until the profile returns to (and stays near) the baseline.
+
+Recovery is declared when 'obs(t)' re-enters a tolerance band around the baseline and stays there for 'r' consecutive days (controlled by arguments such as 'tol' and 'stick').
+
+We find the smallest 'tau >= 0' such that for all 'u' in the interval from 't_hat + tau' to 't_hat + tau + r - 1':
+
+abs( obs(u) - baseline(u) ) <= tol * baseline(u)
+
+Then: 'TTB = tau'.
+
+If this condition is never satisfied before DIM 305, 'TTB' is set to 'NA' (right-censored).
+
+5) Recovery half-life (t_1_2)
+
+Earliest time after nadir when half of the drop has been recovered.
+
+With amplitude 'A' as above, define the half-recovery level:
+
+L_half = baseline(t_start) - A / 2
+
+Then:
+
+t_1_2 = minimum tau >= 0 such that obs(t_hat + tau) >= L_half
+
+6) Slopes (decline and recovery)
+
+Average daily change during the decline into the nadir and during early recovery, summarizing the episode shape.
+
+For a 'K'-day local window:
+
+DeclineSlope = ( obs( min(t_hat, t_start + K) ) - obs(t_start) ) / ( min(t_hat, t_start + K) - t_start )
+
+RecoverySlope = ( obs( min(t_end, t_hat + K) ) - obs(t_hat) ) / ( min(t_end, t_hat + K) - t_hat )
+
+7) AUC_deviation
+
+Trapezoidal area under the curve of the milk deficit 'baseline(t) - obs(t)' across the whole episode. It summarizes how much milk was lost and for how long (volume × duration).
+
+Conceptually:
+
+AUC_deviation = integral of [baseline(t) - obs(t)] dt from t_start to t_end
+
+In practice this is approximated via the trapezoidal rule on discrete DIMs.
+
+8) prod_decline_slope_amp
+
+Product of the decline slope (anchor → nadir) and the amplitude (anchor − nadir). It combines speed and depth of the decline into a single indicator of how “aggressive” the drop is.
+
+prod_decline_slope_amp = DeclineSlope * A
+
+9) prod_recovery_slope_TTB
+
+Product of the recovery slope (nadir → recovery) and Time-to-baseline (TTB). It combines how fast the animal recovers with how long recovery takes, summarizing recovery efficiency.
+
+prod_recovery_slope_TTB = RecoverySlope * TTB
+
+The function returns a list with two data frames containing:
+
+*episodes:* individual milk loss events and their resilience indicators;
+
+*aggregates:* milk loss events aggregated per individual.
+
+```{r}
+#Creating a input file based on data frame with all ensemble predictions
+out.imp.ensemb <- do.call(rbind, out.ensemble$production)
+
+#Estimating the milk loss events
+res.ensem <- milkloss_detect(
+  data = out.imp.ensemb,
+  id_col = "ID",
+  dim_col = "DIM",
+  MY_col = "DMY",
+  MY_pred = "weight_AIC",
+  dim_start = 11, dim_end = 294,
+  drop_pct = 0.10, min_len = 1,
+  rec_mode = "pctbase", rec = 0.99, stick = 2
+)
+
+#Checking the output
+str(res.ensem)
+```
+
+The EMOTIONS package also contains a function, named `PlotMilkLoss`, that allows to plot the milk loss events identified by the `milkloss_detect` function. The arguments of `PlotMilkLoss` are:
+
+*data:* A data frame containing the observed and predicted daily milking records
+
+*ID:* The ID of the individual that will have the daily milking records plotted
+
+*res.milkloss:* The object with the output of milkloss_detect function
+
+*MY_col:* The name of the column containing the observed milk yield
+
+*MY_pred:* The name of the column containing the predicted milk yield
+
+*col:* The colors of the actual, predicted values, and milk loss events. In this order
+
+*id_col:* The name of the column containing the individual IDs
+
+```{r, fig.width=17, fig.height=8}
+PlotMilkLoss(data=out.imp.ensemb, 
+                       ID="ID2", 
+                       res.milkloss=res.ensem,
+                       MY_col="DMY", 
+                       MY_pred="weight_AIC",
+                       col = c("red", "blue", "darkgreen"),
+                       id_col = "ID")
+```

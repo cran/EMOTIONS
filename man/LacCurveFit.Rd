@@ -2,7 +2,7 @@
 % Please edit documentation in R/LacCurveFit.R
 \name{LacCurveFit}
 \alias{LacCurveFit}
-\title{A wrapper function for the ModelsLac function that fits lactation curve models based on daily production and days in milk records simultaneously for a list of animals}
+\title{A wrap function to the ModelsLac function that allows the fit of lactation curve models based on daily production and days in milk records simultaneously for a list of animals}
 \usage{
 LacCurveFit(
   data,
@@ -12,29 +12,29 @@ LacCurveFit(
   alpha = 0.5,
   models = "All",
   param_list = NULL,
-  silent = TRUE
+  silent = T
 )
 }
 \arguments{
-\item{data}{A data frame containing the daily milking records.}
+\item{data}{A data frame containing the daily milking records}
 
-\item{ID}{The name of the column containing the unique IDs of the individuals.}
+\item{ID}{The name of the column containing the unique IDs of the individuals}
 
-\item{trait}{The name of the column containing daily milking records.}
+\item{trait}{The name of the column containing daily milking records}
 
-\item{dim}{The name of the column containing days in milk records.}
+\item{dim}{The name of the column containing days in milk records}
 
-\item{alpha}{A penalization factor, ranging from 0 to 1, for the estimation of the model's weight.}
+\item{alpha}{A penalization factor, ranging from 0 to 1, for the estimation of the model`s weight}
 
-\item{models}{A vector describing the models to be included in the analysis. In total, 47 models are included in EMOTIONS. The default option is "All", which results in the inclusion of the 47 models. Alternatively, a vector containing any subset of the following models can be provided: "MMR", "MME", "brody23", "brody24", "SCH", "SCHL", "PBE", "wood", "DHA", "CB", "QP", "CLD", "PapBo1", "PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1", "GS2", "LQ", "wil", "wilk", "wilycsml", "BC", "DJK", "MG2", "MG4", "MG", "KHN", "AS", "FRP", "PTmult", "PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw", "legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg".}
+\item{models}{A vector describing the models to be included in the analysis. In total, 47 models are included in EMOTIONS. The default option is "All", which results in the inclusion of the 47 models. Alternatively, a vector containing any subset of the following models can be provided: "MMR","MME","brody23","brody24", "SCH","SCHL","PBE","wood","DHA", "CB","QP","CLD","PapBo1","PapBo2", "PapBo3", "PapBo4", "PapBo6", "GS1",  "GS2","LQ", "wil", "wilk", "wilycsml", "BC", "DJK","MG2", "MG4", "MG", "KHN", "AS", "FRP","PTmult","PTmod", "MonoG", "MonoGpw", "DiG", "DiGpw","legpol3", "legpol4", "legpolWil", "cubsplin3", "cubsplin4", "cubsplin5", "cubsplindef", "wilminkPop", "qntReg".}
 
-\item{param_list}{A list composed of the models, named as in the models parameter, and the respective parameters included in the models.}
+\item{param_list}{A list composed by the models, named as in the models parameter, and the repective parameters included in the models.}
 
-\item{silent}{A logical value defining whether warnings should be printed during the model fitting. The default value is TRUE (not printing warnings).}
+\item{silent}{A logical string defining if warning should be printed or not during the model fitting. The default value is TRUE (not printing warnings).}
 }
 \value{
-A list containing the fitted models, the model's weights and ranks for each weighting strategy, and the predicted daily production obtained through the model ensemble for each weighting strategy.
+A list containing the fitted models, the model`s weigths and ranks for each weighting strategy, and the predicted daily production obtained through the model ensemble for each weighting strategy
 }
 \description{
-The function uses a data frame containing the daily milking records as input.
+The function uses a data frame containing the daily milking records as input
 }

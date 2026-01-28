@@ -1,14 +1,11 @@
-#' Visualize the distribution of model ranks across individuals using ridge density plots
-#'
-#' The `RidgeModels` function creates ridge density plots to visualize the distribution of model ranks across individuals.
-#'
-#' @param LacCurveFit The object returned by the `LacCurveFit` function
-#' @param metric The name of the metric used to plot the model ranks
-#' @return A ridge density plot showing the distribution of ranks for the models included in the ensemble
+#' The function RidgeModels allows the visualization of the distribution of model's ranks across individuals using ridge density plots
+#' @param LacCurveFit The object obtained from the LacCurveFit function
+#' @param metric The name of the metric to be use to plot the model´s ranks
+#' @return A ridge density plots for the models included in the ensemble
 #' @importFrom ggplot2 ggplot aes geom_point geom_line geom_segment labs theme theme_minimal element_text
 #' @importFrom dplyr arrange desc
 #' @importFrom rlang sym
-#' @importFrom ggridges geom_density_ridges theme_ridges
+#' @importFrom ggridges  geom_density_ridges theme_ridges
 #' @export
 RidgeModels<-function(LacCurveFit,metric="AIC_rank"){
 

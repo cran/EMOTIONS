@@ -2,18 +2,18 @@
 % Please edit documentation in R/RidgeModels.R
 \name{RidgeModels}
 \alias{RidgeModels}
-\title{Visualize the distribution of model ranks across individuals using ridge density plots}
+\title{The function RidgeModels allows the visualization of the distribution of model's ranks across individuals using ridge density plots}
 \usage{
 RidgeModels(LacCurveFit, metric = "AIC_rank")
 }
 \arguments{
-\item{LacCurveFit}{The object returned by the `LacCurveFit` function}
+\item{LacCurveFit}{The object obtained from the LacCurveFit function}
 
-\item{metric}{The name of the metric used to plot the model ranks}
+\item{metric}{The name of the metric to be use to plot the model´s ranks}
 }
 \value{
-A ridge density plot showing the distribution of ranks for the models included in the ensemble
+A ridge density plots for the models included in the ensemble
 }
 \description{
-The `RidgeModels` function creates ridge density plots to visualize the distribution of model ranks across individuals.
+The function RidgeModels allows the visualization of the distribution of model's ranks across individuals using ridge density plots
 }

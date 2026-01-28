@@ -1,9 +1,9 @@
 #' Define the parameters for the lactation curve models to be fitted
 #'
-#' @param x A data frame containing the daily milking records for the individual
-#' @param trait The name of the column containing the daily milking records
-#' @param dim The name of the column containing the days in milk (DIM) records
-#' @return A list containing the parameters to be used in the lactation curve models
+#' @param x  data frame containing the daily milking records for the individual
+#' @param trait The name of the column containing daily milking records
+#' @param dim The name of the column containing days in milk records
+#' @return A list containing the parameters to be included in the lactation curve models
 #' @keywords internal
 ParDef<-function(x,trait,dim){
 

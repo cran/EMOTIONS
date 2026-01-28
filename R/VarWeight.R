@@ -1,10 +1,8 @@
-#' Estimate normalized model weights based on the variance of the predictions
-#'
-#' This function estimates normalized model weights by evaluating the variance of each model's predictions.
+#' Estimate normalized model`s weights based on the variance of the predictions
 #'
 #' @param converged_models A list containing the fitted models for the individual
-#' @param x A data frame containing the daily milking records for the individual
-#' @return A vector containing the normalized weights for each model
+#' @param x  data frame containing the daily milking records for the individual
+#' @return A vector containing the model normalized weight
 #' @keywords internal
 VarWeight<-function(converged_models, x){
 

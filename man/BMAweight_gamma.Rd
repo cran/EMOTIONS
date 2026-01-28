@@ -2,21 +2,21 @@
 % Please edit documentation in R/BMAweight_gamma.R
 \name{BMAweight_gamma}
 \alias{BMAweight_gamma}
-\title{Estimate normalized model weights using an Expectation–Maximization (EM) algorithm with a gamma distribution}
+\title{Estimate normalized model`s weights based on a  Expectation–Maximization (EM) algorithm using a gamma distribution}
 \usage{
 BMAweight_gamma(converged_models, x, trait)
 }
 \arguments{
 \item{converged_models}{A list containing the fitted models for the individual}
 
-\item{x}{A data frame containing the daily milking records for the individual}
+\item{x}{data frame containing the daily milking records for the individual}
 
 \item{trait}{The name of the column containing daily milking records}
 }
 \value{
-A vector containing the normalized model weights based on the Bayesian Model Averaging (BMA) approach proposed by Duan et al. (2006), adapted to use a gamma distribution
+A vector containing the model normalized weight based on the Bayeasian Model Average (BMA) appaoch proposed by Duan et al. (2006) with an adaptation for to use a gamma distribution
 }
 \description{
-Estimate normalized model weights using an Expectation–Maximization (EM) algorithm with a gamma distribution
+Estimate normalized model`s weights based on a  Expectation–Maximization (EM) algorithm using a gamma distribution
 }
 \keyword{internal}
